@@ -61,6 +61,10 @@ function displayWeapons($weapons)
     }
     echo '</table>';
 }
+
+$db = mysqli_connect("mh3umysql.ca2wpqtfekrr.us-east-1.rds.amazonaws.com","MH3U", "hunters3U","MH3U", 3333);
+$results = mysqli_query($db, "SELECT * FROM Greatswords");
+var_dump($results);
 $weaponStats = array();
 $weaponStats[name] = 'Test';
 $weaponStats[attack] = 125;
