@@ -69,6 +69,7 @@ while($row = mysqli_fetch_array($results)){
     $weapon[name] = $row[Name];
     $weapon[attack] = $row[RawValue];
     $weapon[element] = $row[Element1];
+    //format based on awaken
     $weapon[elementalAttack] = $row[Element1Value];
     $weapon[sharpness] = "---";
     $weapon[slots] = "- - -";
@@ -79,16 +80,4 @@ while($row = mysqli_fetch_array($results)){
     array_push($weapons,$weapon);
 }
 
-$weaponStats = array();
-$weaponStats[name] = 'Test';
-$weaponStats[attack] = 125;
-$weaponStats[element] = 'fire';
-$testWeapon = new Weapon($weaponStats);
-$weaponStats2[name] = 'Weapon';
-$weaponStats2[attack] = 225;
-$weaponStats2[elementalAttack] = 100;
-$weaponStats2[element] = 'water';
-$testWeapon2 = new Weapon($weaponStats2);
-$testWeapons = array($testWeapon, $testWeapon2);
-//for()
 displayWeapons($weapons);
