@@ -19,7 +19,6 @@ class Weapon {
     public $attack;
     public $elementalAttack;
     public $element;
-    public $totalAttack;
     public $sharpness;
     public $slots;
     public $rarity;
@@ -42,9 +41,8 @@ function displayWeapons($weapons)
             <tr>
                 <th>Name</th>
                 <th>Attack</th>
-                <th>Elemental Attack</th>
                 <th>Element</th>
-                <th>Total Attack</th>
+                <th>Elemental Attack</th>
                 <th>Sharpness</th>
                 <th>Slots</th>
                 <th>Rarity</th>
@@ -64,7 +62,23 @@ function displayWeapons($weapons)
 
 $db = mysqli_connect("mh3umysql.ca2wpqtfekrr.us-east-1.rds.amazonaws.com","MH3U", "hunters3U","MH3U", 3333);
 $results = mysqli_query($db, "SELECT * FROM Greatswords");
-var_dump($results);
+
+$weapons = array();
+while($row = mysqli_fetch_array($results)){
+    $weapon = array();
+    $weapon[name] = $row[Name];
+    $weapon[attack] = $row[RawValue];
+    $weapon[element] = $row[Element1];
+    $weapon[elementalAttack] = $row[Element1Value];
+    $weapon[sharpness] = "---";
+    $weapon[slots] = "- - -";
+    $weapon[rarity] = $row[Rarity];
+    $weapon[affinity] = $row[Affinity];
+    $weapon[defense] = $row[Defense];
+
+    array_push($weapons,$weapon);
+}
+
 $weaponStats = array();
 $weaponStats[name] = 'Test';
 $weaponStats[attack] = 125;
@@ -77,4 +91,4 @@ $weaponStats2[element] = 'water';
 $testWeapon2 = new Weapon($weaponStats2);
 $testWeapons = array($testWeapon, $testWeapon2);
 //for()
-displayWeapons($testWeapons);
+displayWeapons($weapons);
